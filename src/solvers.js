@@ -16,13 +16,13 @@
 
 
 window.findNRooksSolution = function(n) {
-  var matrix = [[0, 1, 0, 0],
+  var matrix = [[1, 0, 0, 0],
                 [0, 0, 0, 1],
-                [1, 0, 0, 0],
-                [0, 1, 0, 0]];
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]];
   var newBoard = new window.Board(matrix); //window.displayBoard);
 
-  var solution = newBoard.hasAnyRowConflicts();
+  var solution = newBoard.hasAnyColConflicts();
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;

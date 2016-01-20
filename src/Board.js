@@ -111,7 +111,12 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var conflictFound = false;
+      for (var i = 0; i < this.get('n'); i++) {
+        conflictFound = conflictFound || this.hasColConflictAt(i);
+      };
+      console.log(conflictFound);
+      return conflictFound;
     },
 
 
