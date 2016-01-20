@@ -130,9 +130,17 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var columnIndex = majorDiagonalColumnIndexAtFirstRow;
       var piecesInDiagonal = 0;
+      var rowIndex = 0;
+      
+      if (columnIndex < 0) {
+        rowIndex = columnIndex * -1;
+        columnIndex = 0;
+      }
 
-      for (var rowIndex = 0; rowIndex < this.get('n') && columnIndex < this.get('n'); rowIndex++){
+      while(rowIndex < this.get('n') && columnIndex < this.get('n')) {
         piecesInDiagonal += this.get(rowIndex)[columnIndex];
+        
+        rowIndex++;
         columnIndex++;
       }
 
