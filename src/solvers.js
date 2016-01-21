@@ -36,7 +36,7 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  function factorial(n) { 
+  var factorial = function(n) { 
     if (n <= 1) return 1; 
     return n*factorial(n-1); 
   } 
@@ -50,18 +50,21 @@ window.countNRooksSolutions = function(n) {
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
   var solution;
-  if (n > 1) {
-
+  if (n === 0) {
+    solution = [];
+  } else if (n === 1) {
+    solution = [[1]];
+  } else if (n === 2 || n === 3) {
+    var emptyBoard = new Board({n:n});
+    solution = emptyBoard.rows();
+  } else {
     var board = new Board({n:n});
     var queensAdded = 0;
     var currentRow = 0; // {row: 0, col: -1}  --->  0, only need rows because of your idea
-    var boardTree = new BoardTree(board, queensAdded, currentRow );0;oardTree.hasValidChild();
-  } else if (n > 0) {
-    solution = [[1]];
-  } else {
-    solution = [[]];
+    var boardTree = new BoardTree(board, queensAdded, currentRow); // 0;oardTree.hasValidChild();
+    solution = boardTree.hasValidChild();
   }
-
+  console.log(n,solution);
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
 };
