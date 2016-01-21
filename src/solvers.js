@@ -50,15 +50,16 @@ window.countNRooksSolutions = function(n) {
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
   var solution;
-  if (n > 0) {
+  if (n > 1) {
 
     var board = new Board({n:n});
     var queensAdded = 0;
-    var currentPosition= {row: 0, col: -1};
-    var boardTree = new BoardTree(board, queensAdded, currentPosition);
-    solution = boardTree.hasValidChild();
+    var currentRow = 0; // {row: 0, col: -1}  --->  0, only need rows because of your idea
+    var boardTree = new BoardTree(board, queensAdded, currentRow );0;oardTree.hasValidChild();
+  } else if (n > 0) {
+    solution = [[1]];
   } else {
-    solution = [[0]];
+    solution = [[]];
   }
 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
