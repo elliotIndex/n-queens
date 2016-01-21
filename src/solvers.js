@@ -14,17 +14,21 @@
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 
 
+/*
+ * Complexity: What is the time complexity of the above functions?
+ */
+
+// addChild has constant time complexity
+
+// contains has linear time complexity because every node must be
+// visited before you can determine that a tree does NOT contain
+// the target in the worst case scenario
 
 window.findNRooksSolution = function(n) {
-  // var matrix = [[1, 0, 0, 0],
-  //               [0, 0, 0, 1],
-  //               [0, 0, 0, 0],
-  //               [0, 0, 0, 0]];
-  // var newBoard = new window.Board(matrix); //window.displayBoard);
+  var board = new Board({n:n});
 
-  // var solution = newBoard.hasAnyColConflicts();
-  var solution = new Board({n:n});
 
+  var solution = board.rows();
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
 };
