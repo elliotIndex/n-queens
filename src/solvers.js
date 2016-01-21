@@ -58,11 +58,35 @@ window.findNQueensSolution = function(n) {
     solution = emptyBoard.rows();
   } else {
     var board = new Board({n:n});
-    var queensAdded = 0;
-    var currentRow = 0; // {row: 0, col: -1}  --->  0, only need rows because of your idea
-    var boardTree = new BoardTree(board, queensAdded, currentRow); // 0;oardTree.hasValidChild();
-    solution = boardTree.hasValidChild();
+    var numQueens = 0;
+    var rowIndex = 0; 
+    // var boardTree = new BoardTree(board, numQueens, rowIndex);
+    var hasValidChild = function(board) {
+      if (numQueens >= n && !board.hasAnyQueensConflicts()) {
+        return board.rows();
+      }
+      for (var colIndex = 0; colIndex < n; colIndex++) {
+        board.togglePiece(rowIndex, colIndex);
+        if(!board.hasAnyQueensConflicts()) {
+          numQueens++;
+          rowIndex++;
+          var solution = hasValidChild(board);
+          if (solution) {
+            return solution;
+          } else {
+            numQueens--;
+            rowIndex--;
+            board.togglePiece(rowIndex, colIndex);
+          }
+        } else {
+          board.togglePiece(rowIndex, colIndex);
+        }
+      }
+      return 0;
+    }
+    solution = hasValidChild(board);
   }
+
   console.log(n,solution);
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
