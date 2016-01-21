@@ -60,7 +60,6 @@ window.findNQueensSolution = function(n) {
     var board = new Board({n:n});
     var numQueens = 0;
     var rowIndex = 0; 
-    // var boardTree = new BoardTree(board, numQueens, rowIndex);
     var hasValidChild = function(board) {
       if (numQueens >= n && !board.hasAnyQueensConflicts()) {
         return board.rows();
