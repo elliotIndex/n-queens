@@ -26,6 +26,9 @@
 
 window.findNRooksSolution = function(n) {
   var board = new Board({n:n});
+  for (var i = 0; i < n; i++) {
+    board.togglePiece(i,i);
+  }
 
 
   var solution = board.rows();
