@@ -87,10 +87,6 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      // return this.rows().reduce(function(conflictFound, row, rowIndex){
-      //   return conflictFound || this.hasRowConflictAt(rowIndex);
-      // }, false);
-
       var conflictFound = false;
       for (var i = 0; i < this.get('n'); i++) {
         conflictFound = conflictFound || this.hasRowConflictAt(i);
@@ -109,7 +105,7 @@
       for (var rowIndex = 0; rowIndex < this.get('n'); rowIndex++) {
         piecesInColumn += this.get(rowIndex)[colIndex];
       }
-      return piecesInColumn > 1; // fixme
+      return piecesInColumn > 1;
     },
 
     // test if any columns on this board contain conflicts
@@ -122,6 +118,9 @@
     },
 
 
+    indexInBounds: function(index) {
+      return index >= 0 && index < this.get('n');
+    },
 
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------
@@ -133,11 +132,11 @@
       var rowIndex = 0;
 
       if (columnIndex < 0) {
-        rowIndex = columnIndex * -1;
+        rowIndex = -columnIndex;
         columnIndex = 0;
       }
 
-      while(rowIndex < this.get('n') && columnIndex < this.get('n')){//this.indexInBounds(columnIndex) && this.indexInBounds(rowIndex)) {
+      while(this.indexInBounds(columnIndex) && this.indexInBounds(rowIndex)) {
         piecesInDiagonal += this.get(rowIndex)[columnIndex];
         
         rowIndex++;
@@ -147,6 +146,7 @@
       return piecesInDiagonal > 1; // fixme
     },
 
+    
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var conflictFound = false;
@@ -157,9 +157,6 @@
     },
     
 
-    indexInBounds: function(index) {
-      return index >= 0 && index < this.get('n');
-    },
 
     // Minor Diagonals - go from top-right to bottom-left
     // --------------------------------------------------------------
@@ -175,7 +172,7 @@
         columnIndex = this.get('n')-1;
       }
 
-      while(rowIndex < this.get('n') && columnIndex >= 0) { //this.indexInBounds(columnIndex) && this.indexInBounds(rowIndex)) {
+      while(this.indexInBounds(columnIndex) && this.indexInBounds(rowIndex)){
         piecesInDiagonal += this.get(rowIndex)[columnIndex];
 
         columnIndex--;
