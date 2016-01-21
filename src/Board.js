@@ -5,8 +5,10 @@
 (function() {
 
   window.Board = Backbone.Model.extend({
+    // numQueens: 0,
+    // lastQueenPosition: lastQueenPosition,
 
-    initialize: function (params) {
+    initialize: function (params, numQueens, lastQueenPosition) {
       if (_.isUndefined(params) || _.isNull(params)) {
         console.log('Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:');
         console.log('\t1. An object. To create an empty board of size n:\n\t\t{n: %c<num>%c} - Where %c<num> %cis the dimension of the (empty) board you wish to instantiate\n\t\t%cEXAMPLE: var board = new Board({n:5})', 'color: blue;', 'color: black;','color: blue;', 'color: black;', 'color: grey;');
