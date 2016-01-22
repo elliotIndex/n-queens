@@ -38,7 +38,7 @@ window.findNRooksSolution = function(n) {
 window.countNRooksSolutions = function(n) {
   var factorial = function(n) { 
     return n <= 1 ? 1 : n*factorial(n-1);
-  } 
+  };
 
   var solutionCount = factorial(n);
 
@@ -82,7 +82,7 @@ window.findNQueensSolution = function(n) {
         }
       }
       return 0;
-    }
+    };
     solution = hasValidChild(board);
   }
 
@@ -92,28 +92,28 @@ window.findNQueensSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solutionCount;
+  var solutionCount = 0;
   if (n === 0) {
-    solutionCount = 1;
+    return 1;
   } else if (n === 1) {
-    solutionCount = 1;
+    return 1;
   } else if (n === 2 || n === 3){
-    solutionCount = 0;
+    return 0;
   } else {
     var board = new Board({n:n});
     var numQueens = 0;
     var rowIndex = 0; 
     var countValidChildren = function(board) {
       if (numQueens >= n && !board.hasAnyQueensConflicts()) {
-        return 1;
+        solutionCount++;
+        return;
       }
-      var solutionsSoFar = 0;
       for (var colIndex = 0; colIndex < n; colIndex++) {
         board.togglePiece(rowIndex, colIndex);
         if(!board.hasAnyQueensConflicts()) {
           numQueens++;
           rowIndex++;
-          solutionsSoFar += countValidChildren(board);
+          countValidChildren(board);
           numQueens--;
           rowIndex--;
           board.togglePiece(rowIndex, colIndex);
@@ -121,11 +121,12 @@ window.countNQueensSolutions = function(n) {
           board.togglePiece(rowIndex, colIndex);
         }
       }
-      return solutionsSoFar;
-    }
-    solutionCount = countValidChildren(board);
+      return; //!
+    };
+    // solutionCount = countValidChildren(board);
+    countValidChildren(board);
   }
 
-  console.log('Number of solutions for ' + n + ' queens:', solutionCount);
+  // console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
 };

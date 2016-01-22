@@ -169,7 +169,7 @@
       var piecesInDiagonal = 0;
       var rowIndex = 0;
       
-      if (columnIndex > this.get('n')) {
+      if (columnIndex >= this.get('n')) {
         rowIndex = columnIndex - (this.get('n') - 1);
         columnIndex = this.get('n')-1;
       }

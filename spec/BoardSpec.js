@@ -72,9 +72,9 @@ describe("Board", function() {
 
     verifyConflictTypes(['minorDiagonal', 'queens'], [
       [0, 0, 0, 0],
-      [0, 0, 0, 0],
       [0, 0, 0, 1],
-      [0, 0, 1, 0]
+      [0, 0, 1, 0],
+      [0, 0, 0, 0]
     ]);
   });
 });
